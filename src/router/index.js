@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-const Home = () =>
+const Login = () =>
     import ( /* webpackChunkName: "about" */ '../views/Login.vue')
 
 const routes = [{
@@ -15,7 +15,7 @@ const routes = [{
     {
         path: '/login',
         name: 'Login',
-        component: Home
+        component: Login
     },
     {
         path: '/home',
