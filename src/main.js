@@ -6,7 +6,8 @@ import './plugins/element.js'
 import axios from 'axios'
 Vue.prototype.$axios = axios;
 Vue.config.productionTip = false
-
+import VueParticles from 'vue-particles'
+Vue.use(VueParticles)  
 new Vue({
     router,
     store,

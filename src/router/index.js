@@ -4,13 +4,12 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const Login = () =>
-    import ( /* webpackChunkName: "about" */ '../views/Login.vue')
+    import( /* webpackChunkName: "about" */ '../views/Login.vue')
 
-const routes = [{
+const router = new VueRouter({
+    routes: [{
         path: '/',
-        redirect: {
-            name: 'Home',
-        }
+        redirect: '/login'
     },
     {
         path: '/login',
@@ -21,12 +20,16 @@ const routes = [{
         path: '/home',
         name: 'Home',
         component: () =>
-            import ( /* webpackChunkName: "about" */ '../views/Home.vue')
-    }
-]
+            import( /* webpackChunkName: "about" */ '../views/Home.vue')
+    }]
+})
 
-const router = new VueRouter({
-    routes
+
+
+router.beforeEach((to, from, next) => {
+    if (to.path === '/login') return next();
+    const tokenStr = localStorage.getItem('token');
+    if (!tokenStr) return next('/login');
 })
 
 export default router

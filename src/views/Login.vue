@@ -1,15 +1,43 @@
 <template>
   <div class="login">
+    <vue-particles
+      color="#fff"
+      :particleOpacity="0.7"
+      :particlesNumber="100"
+      shapeType="circle"
+      :particleSize="4"
+      linesColor="#fff"
+      :linesWidth="1"
+      :lineLinked="true"
+      :lineOpacity="0.4"
+      :linesDistance="150"
+      :moveSpeed="2"
+      :hoverEffect="true"
+      hoverMode="grab"
+      :clickEffect="true"
+      clickMode="push"
+      class="lizi"
+    >
+    </vue-particles>
     <div class="content_box">
       <h3 class="title">登录</h3>
-      <el-form class="formBox" :model="LoginForm" :rules="rules" ref="LoginForm">
+      <el-form
+        class="formBox"
+        :model="LoginForm"
+        :rules="rules"
+        ref="LoginForm"
+      >
         <el-form-item class="formItem" prop="userName">
           <el-input placeholder="请输入账号" v-model="LoginForm.userName">
             <i slot="prefix" class="el-input__icon el-icon-s-custom"></i>
           </el-input>
         </el-form-item>
         <el-form-item class="formItem" prop="password">
-          <el-input placeholder="请输入密码" type="password" v-model="LoginForm.password">
+          <el-input
+            placeholder="请输入密码"
+            type="password"
+            v-model="LoginForm.password"
+          >
             <i slot="prefix" class="el-input__icon el-icon-lock"></i>
           </el-input>
         </el-form-item>
@@ -42,7 +70,7 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.$router.push('/home')
+          this.$router.push("/home");
         } else {
           console.log("error submit!!");
           return false;
