@@ -36,7 +36,7 @@
           <el-input
             placeholder="请输入密码"
             type="password"
-            v-model="LoginForm.password"
+            v-model="LoginForm.password" @keyup.native.enter="enterKey"
           >
             <i slot="prefix" class="el-input__icon el-icon-lock"></i>
           </el-input>
@@ -77,6 +77,9 @@ export default {
         }
       });
     },
+    enterKey(){
+      this.$router.push("/home");
+    }
   },
 };
 </script>
