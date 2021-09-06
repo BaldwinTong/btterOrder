@@ -6,26 +6,31 @@
         <h3>后台管理系统</h3>
       </div>
       <div class="top_right">
-        <el-dropdown>
+        <el-dropdown trigger="click">
           <div class="head_img">
             <img src="../assets/01.jpg" alt="" />
-            <span>admin</span>
+            <div class="userName">admin</div>
+            <span class="icon iconfont icon-zhankai icon-yangshi_icon_tongyong_expand"></span>
           </div>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item class="dropItems">
+              <div>个人中心</div>
+              <span class="icon iconfont iconfont2 icon-gerenzhongxin"></span>
+            </el-dropdown-item>
+            <el-dropdown-item class="dropItems">
               <span>设置</span>
-              <span class="icon iconfont iconfont2 icon-shezhi"></span>
+              <span class="icon iconfont iconfont2 icon-shezhi1"></span>
             </el-dropdown-item>
             <el-dropdown-item class="dropItems">
               <span>退出</span>
-              <span class="icon iconfont iconfont icon-tuichu"></span>
+              <span class="icon iconfont iconfont2 icon-shinshoptuichudenglu"></span>
             </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
     </el-header>
     <el-container>
-      <el-aside width="180px"> </el-aside>
+      <el-aside class="aside" width="200px"></el-aside>
       <el-main>Main</el-main>
     </el-container>
   </el-container>
@@ -59,8 +64,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #BAF3FA;
-  /* background-image: linear-gradient(to right, #0f0c29, #302b63, #24243e); */
+  /* background-color: #BAF3FA; */
+  background-image: linear-gradient(to right, #544a7d,  #ffd452 );
 }
 .title {
   display: flex;
@@ -87,17 +92,26 @@ body {
   height: 40px;
   margin-right: 5px;
 }
+.userName{
+  font-size: 16px;
+  font-weight: 600;
+  color: #240b36;
+  margin-right: 6px;
+}
+.icon-zhankai{
+  color: #000000;
+}
 .dropItems {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
 
 .iconfont2 {
   font-size: 22px;
 }
-.el-aside {
-  background-color: pink;
+.aside {
+  background-image: linear-gradient(to top,  #0f0c29,#302b63  );
 }
 .el-main {
   background-color: #fff;
