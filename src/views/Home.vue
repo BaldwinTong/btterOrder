@@ -37,13 +37,21 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {
       isCollapse: true,
     };
   },
-  methods: {},
+  created(){
+    let token = localStorage.getItem('token');
+    let permissions = localStorage.getItem('permissions')
+    console.log(token,permissions);
+  },
+  methods: {
+   
+  },
 };
 </script>
 

@@ -36,7 +36,8 @@
           <el-input
             placeholder="请输入密码"
             type="password"
-            v-model="LoginForm.password" @keyup.native.enter="enterKey"
+            v-model="LoginForm.password"
+            @keyup.native.enter="enterKey"
           >
             <i slot="prefix" class="el-input__icon el-icon-lock"></i>
           </el-input>
@@ -53,6 +54,7 @@
   </div>
 </template>
 <script>
+import { Login } from "../api/user.js";
 export default {
   data() {
     return {
@@ -70,16 +72,25 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.$router.push("/home");
+          Login(this.LoginForm)
+            .then((res) => {
+              console.log(res.permissions);
+              localStorage.setItem('token',res.token);
+              localStorage.setItem('permissions',res.permissions);
+              this.$router.push("/home");
+            })
+            .catch((error) => {
+              console.log(error);
+            });
         } else {
           console.log("error submit!!");
           return false;
         }
       });
     },
-    enterKey(){
+    enterKey() {
       this.$router.push("/home");
-    }
+    },
   },
 };
 </script>

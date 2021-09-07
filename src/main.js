@@ -3,12 +3,11 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './plugins/element.js'
-import axios from 'axios'
 import './assets/icon/iconfont.css'
-Vue.prototype.$axios = axios;
+import "./mock/mock"
 Vue.config.productionTip = false
 import VueParticles from 'vue-particles'
-Vue.use(VueParticles)  
+Vue.use(VueParticles)
 new Vue({
     router,
     store,
