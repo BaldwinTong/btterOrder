@@ -1,56 +1,33 @@
 <template>
   <el-container class="home_container">
-    <el-header>
-      <div class="title">
-        <img src="../assets/logo.png" alt="" />
-        <h3>后台管理系统</h3>
-      </div>
-      <div class="top_right">
-        <el-dropdown trigger="click">
-          <div class="head_img">
-            <img src="../assets/01.jpg" alt="" />
-            <div class="userName">admin</div>
-            <span class="icon iconfont icon-zhankai icon-yangshi_icon_tongyong_expand"></span>
-          </div>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item class="dropItems">
-              <div>个人中心</div>
-              <span class="icon iconfont iconfont2 icon-gerenzhongxin"></span>
-            </el-dropdown-item>
-            <el-dropdown-item class="dropItems">
-              <span>设置</span>
-              <span class="icon iconfont iconfont2 icon-shezhi1"></span>
-            </el-dropdown-item>
-            <el-dropdown-item class="dropItems">
-              <span>退出</span>
-              <span class="icon iconfont iconfont2 icon-shinshoptuichudenglu"></span>
-            </el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
-      </div>
-    </el-header>
+    <el-header><sellheader @loginOut="LoginOut"></sellheader></el-header>
     <el-container>
       <el-aside class="aside" width="200px"></el-aside>
-      <el-main>Main</el-main>
+      <el-main> <router-view></router-view> </el-main>
     </el-container>
   </el-container>
 </template>
 
 <script>
-
+import sellheader from "../components/header.vue";
 export default {
   data() {
     return {
-      isCollapse: true,
+      showLoginOut:false
     };
   },
-  created(){
+  created() {
     let token = localStorage.getItem('token');
-    let permissions = localStorage.getItem('permissions')
-    console.log(token,permissions);
+    console.log(token);
+
+  },
+  components: {
+    sellheader,
   },
   methods: {
-   
+    loginOut(e){
+      console.log(e);
+    }
   },
 };
 </script>
@@ -73,7 +50,7 @@ body {
   justify-content: space-between;
   align-items: center;
   /* background-color: #BAF3FA; */
-  background-image: linear-gradient(to right, #544a7d,  #ffd452 );
+  background-image: linear-gradient(to right, #544a7d, #ffd452);
 }
 .title {
   display: flex;
@@ -100,13 +77,13 @@ body {
   height: 40px;
   margin-right: 5px;
 }
-.userName{
+.userName {
   font-size: 16px;
   font-weight: 600;
   color: #240b36;
   margin-right: 6px;
 }
-.icon-zhankai{
+.icon-zhankai {
   color: #000000;
 }
 .dropItems {
@@ -119,7 +96,7 @@ body {
   font-size: 22px;
 }
 .aside {
-  background-image: linear-gradient(to top,  #0f0c29,#302b63  );
+  background-image: linear-gradient(to top, #0f0c29, #302b63);
 }
 .el-main {
   background-color: #fff;

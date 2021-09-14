@@ -20,7 +20,7 @@
     >
     </vue-particles>
     <div class="content_box">
-      <h3 class="title">登录</h3>
+      <h3 class="loginTitle">登录</h3>
       <el-form
         class="formBox"
         :model="LoginForm"
@@ -72,16 +72,7 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          Login(this.LoginForm)
-            .then((res) => {
-              console.log(res.permissions);
-              localStorage.setItem('token',res.token);
-              localStorage.setItem('permissions',res.permissions);
-              this.$router.push("/home");
-            })
-            .catch((error) => {
-              console.log(error);
-            });
+          this.Login();
         } else {
           console.log("error submit!!");
           return false;
@@ -89,7 +80,19 @@ export default {
       });
     },
     enterKey() {
-      this.$router.push("/home");
+      this.Login();
+    },
+
+    Login() {
+      Login(this.LoginForm)
+        .then((res) => {
+          let token = res.token;
+          this.$store.dispatch("UserLogin", token);
+          this.$router.push("/home");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };
@@ -116,7 +119,7 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.title {
+.loginTitle {
   color: #fff;
   margin-bottom: 10px;
 }

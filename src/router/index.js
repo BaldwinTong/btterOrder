@@ -1,8 +1,8 @@
 import Vue from 'vue'
+import store from '../store/index'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
-const Login = () =>
-    import ( /* webpackChunkName: "about" */ '../views/Login.vue')
+
 const routes = [{
         path: '/',
         redirect: '/home'
@@ -10,13 +10,22 @@ const routes = [{
     {
         path: '/login',
         name: 'Login',
-        component: Login
+        component: () =>
+            import ('../views/Login.vue')
     },
     {
         path: '/home',
         name: 'Home',
+        redirect: "/welcome",
         component: () =>
-            import ( /* webpackChunkName: "about" */ '../views/Home.vue')
+            import ('../views/Home.vue'),
+        children: [{
+            path: '/welcome',
+            name: 'Welcome',
+            component: () =>
+                import ('../views/welcome/welcome.vue'),
+            meta: { requiresAuth: true }
+        }]
     }, {
         path: '/404',
         name: 'notFound',
@@ -39,10 +48,20 @@ VueRouter.prototype.push = function push(location, onResolve, onReject) {
     return originalPush.call(this, location).catch(err => err)
 }
 
-// router.beforeEach((to, from, next) => {
-//     if (to.path === '/login') return next();
-//     const tokenStr = localStorage.getItem('token');
-//     if (!tokenStr) return next('/login');
-// })
+router.beforeEach((to, from, next) => {
+    let token = store.state.token;
+    if (to.meta.requiresAuth) {
+        if (token) {
+            next()
+        } else {
+            next({
+                path: '/login',
+                query: { redirect: to.fullPath }
+            })
+        }
+    } else {
+        next()
+    }
+})
 
 export default router
