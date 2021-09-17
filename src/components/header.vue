@@ -22,7 +22,7 @@
             <span>设置</span>
             <span class="icon iconfont iconfont2 icon-shezhi1"></span>
           </el-dropdown-item>
-          <el-dropdown-item class="dropItems" @click="LoginOut">
+          <el-dropdown-item class="dropItems" @click.native="LoginOut">
             <span>退出</span>
             <span
               class="icon iconfont iconfont2 icon-shinshoptuichudenglu"
@@ -41,24 +41,31 @@ export default {
       isCollapse: true,
     };
   },
-  created() {
-    let token = localStorage.getItem("token");
-    let permissions = localStorage.getItem("permissions");
-    // console.log(token);
-  },
+  created() {},
   methods: {
-      LoginOut(){
-          this.$emit('loginOut',true)
+    LoginOut() {
+      this.$store.dispatch("UserLogout");
+      if (!this.$store.state.token) {
+        this.$router.push("/login");
       }
+    },
   },
 };
 </script>
 
 <style>
-.top_title{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.el-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* background-color: #BAF3FA; */
+  background-image: linear-gradient(to right, #544a7d, #ffd452);
+}
+.top_title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .title {
   display: flex;
@@ -103,10 +110,5 @@ export default {
 .iconfont2 {
   font-size: 22px;
 }
-.aside {
-  background-image: linear-gradient(to top, #0f0c29, #302b63);
-}
-.el-main {
-  background-color: #fff;
-}
+
 </style>
